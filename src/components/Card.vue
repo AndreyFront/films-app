@@ -8,6 +8,7 @@
                 <div class="card__block-image">
                     <picture>
                         <source
+                            v-if="defaultImg.indexOf(card.id) != -1"
                             :srcset="
                                 require('@/assets/image/posters/' +
                                     card.id +
@@ -15,8 +16,13 @@
                             "
                             type="image/webp"
                         />
+                        <source
+                            v-else
+                            src="@/assets/image/posters/0.webp"
+                            type="image/webp"
+                        />
                         <img
-                            src="@/assets/logo.png"
+                            src="@/assets/image/posters/0.webp"
                             class="card__image"
                             alt=""
                         />
@@ -39,17 +45,20 @@
 </template>
 
 <script>
-import "@/assets/scripts/lodash.js";
-
 export default {
     data() {
-        return {};
+        return {
+            defaultImg: [9, 10, 11, 12, 13, 14, 15],
+        };
     },
     props: {
         cards: {
             type: Array,
-            required: true,
         },
+    },
+    errorCaptured(err, vm, info) {
+        this.defaultImg = [9, 10, 11, 12, 13, 14, 15];
+        return false;
     },
 };
 </script>
@@ -178,6 +187,7 @@ export default {
 
 .animate {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .cards-list-item {
@@ -189,9 +199,9 @@ export default {
 }
 
 .cards-list-leave-active {
+    position: absolute;
     width: 0;
     padding: 0;
-    margin: 0;
     transition: all 0.5s ease;
 }
 
@@ -203,10 +213,6 @@ export default {
 
 .cards-list-enter-from {
     transform: translateY(-30px);
-}
-
-.cards-list-leave-to {
-    transform: translateY(30px);
 }
 
 .cards-list-move {
