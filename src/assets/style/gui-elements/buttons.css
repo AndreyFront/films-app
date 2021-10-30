@@ -1,0 +1,47 @@
+.Button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  user-select: none;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  color: inherit;
+  text-align: center;
+  text-decoration-line: none;
+  background-color: transparent;
+  transition: color 0.1s ease-in, background-color 0.1s ease-in,
+  box-shadow 0.2s ease-in;
+}
+
+.Button:hover,
+.Button:focus {
+	color: inherit;
+	text-decoration-line: none;
+}
+
+.Button__icon {
+	margin-left: -4px;
+}
+
+.Button .button__text {
+ 	margin-left: 7px;
+}
+
+.Button__text {
+	text-overflow: ellipsis;
+	transition: color 0.1s ease-in;
+}
+
+.Button + .button__icon {
+  margin-left: 20px;
+}
+
+.Button--full-w {
+  min-width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}

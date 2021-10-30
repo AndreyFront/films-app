@@ -1,30 +1,120 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+    <div class="container">
+        <search @search="searchContent" />
+        <div class="list-cards">
+            <card :cards="resultListCards" />
+        </div>
+    </div>
 </template>
 
+<script>
+import Card from "@/components/Card";
+import Search from "@/components/Search";
+
+export default {
+    components: {
+        Card,
+        Search,
+    },
+    data() {
+        return {
+            searchQuery: "",
+            resultListCards: [],
+            listCards: [
+                {
+                    id: 1,
+                    rating: 7.9,
+                    name: "Дюна",
+                    year: 2021,
+                    genre: "фантастика, боевик",
+                },
+                {
+                    id: 2,
+                    rating: 7.3,
+                    name: "Не время умирать",
+                    year: 2021,
+                    genre: "боевик, триллер",
+                },
+                {
+                    id: 3,
+                    rating: 7.7,
+                    name: "Гнев человеческий",
+                    year: 2021,
+                    genre: "триллер, боевик",
+                },
+                {
+                    id: 4,
+                    rating: 7.1,
+                    name: "День курка",
+                    year: 2020,
+                    genre: "фантастика, боевик",
+                },
+                {
+                    id: 5,
+                    rating: 6.8,
+                    name: "Охота на воров",
+                    year: 2018,
+                    genre: "боевик, триллер",
+                },
+                {
+                    id: 6,
+                    rating: 5.5,
+                    name: "Механик: Воскрешение",
+                    year: 2016,
+                    genre: "боевик, триллер",
+                },
+            ],
+        };
+    },
+    methods: {
+        searchContent(query) {
+            this.searchQuery = query.toLowerCase();
+            if (query.length > 0) {
+                this.resultListCards = this.listCards.filter((card) =>
+                    card.name.toLowerCase().includes(this.searchQuery)
+                );
+            } else {
+                this.resultListCards = this.listCards;
+            }
+        },
+    },
+    mounted() {
+        this.resultListCards = this.listCards;
+    },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "~@/assets/style/fonts.css" screen;
+@import "~@/assets/style/settings.css" screen;
+@import "~@/assets/style/gui-elements/buttons.css" screen;
+
+* {
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Gilroy", sans-serif;
+    font-weight: 400;
+    color: #fff;
 }
 
-#nav {
-  padding: 30px;
+body,
+html {
+    background-color: #24201e;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.container {
+    max-width: 1110px;
+    padding: 0 15px;
+    margin: 0 auto;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.glow-border {
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+}
+
+.list-cards {
+    margin: calc(30px - 20px) -10px 0 -10px;
+    border-radius: 15px;
+    overflow: hidden;
 }
 </style>
