@@ -8,17 +8,10 @@
                 <div class="card__block-image">
                     <picture>
                         <source
-                            v-if="defaultImg.indexOf(card.id) != -1"
+                            v-if="imageCard(card.image)"
                             :srcset="
-                                require('@/assets/image/posters/' +
-                                    card.id +
-                                    '.webp')
+                                require('@/assets/image/posters/' + card.image)
                             "
-                            type="image/webp"
-                        />
-                        <source
-                            v-else
-                            src="@/assets/image/posters/0.webp"
                             type="image/webp"
                         />
                         <img
@@ -47,18 +40,24 @@
 <script>
 export default {
     data() {
-        return {
-            defaultImg: [9, 10, 11, 12, 13, 14, 15],
-        };
+        return {};
     },
     props: {
         cards: {
             type: Array,
         },
     },
-    errorCaptured(err, vm, info) {
-        this.defaultImg = [9, 10, 11, 12, 13, 14, 15];
-        return false;
+    methods: {
+        imageCard(image) {
+            try {
+                if (require("@/assets/image/posters/" + image)) {
+                    return true;
+                }
+            } catch (e) {
+                console.log(e);
+                return false;
+            }
+        },
     },
 };
 </script>

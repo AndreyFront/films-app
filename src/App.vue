@@ -1,6 +1,11 @@
 <template>
-    <div class="container">
-        <search @search="searchContent" />
+    <div class="app container">
+        <div class="block-nav">
+            <div class="block-sorting">
+                <sorting-genre />
+            </div>
+            <search @search="searchContent" />
+        </div>
         <div class="list-cards">
             <card :cards="resultListCards" />
         </div>
@@ -10,11 +15,13 @@
 <script>
 import Card from "@/components/Card";
 import Search from "@/components/Search";
+import SortingGenre from "@/components/SortingGenre";
 
 export default {
     components: {
         Card,
         Search,
+        SortingGenre,
     },
     data() {
         return {
@@ -23,6 +30,7 @@ export default {
             listCards: [
                 {
                     id: 1,
+                    image: "1.webp",
                     rating: 7.9,
                     name: "Дюна",
                     year: 2021,
@@ -30,6 +38,7 @@ export default {
                 },
                 {
                     id: 2,
+                    image: "2.webp",
                     rating: 7.3,
                     name: "Не время умирать",
                     year: 2021,
@@ -37,6 +46,7 @@ export default {
                 },
                 {
                     id: 3,
+                    image: "3.webp",
                     rating: 7.7,
                     name: "Гнев человеческий",
                     year: 2021,
@@ -44,6 +54,7 @@ export default {
                 },
                 {
                     id: 4,
+                    image: "4.webp",
                     rating: 7.1,
                     name: "День курка",
                     year: 2020,
@@ -51,6 +62,7 @@ export default {
                 },
                 {
                     id: 5,
+                    image: "5.webp",
                     rating: 6.8,
                     name: "Охота на воров",
                     year: 2018,
@@ -58,6 +70,7 @@ export default {
                 },
                 {
                     id: 6,
+                    image: "6.webp",
                     rating: 5.5,
                     name: "Механик: Воскрешение",
                     year: 2016,
@@ -65,6 +78,7 @@ export default {
                 },
                 {
                     id: 7,
+                    image: "7.webp",
                     rating: 6.2,
                     name: "Веном 2",
                     year: 2021,
@@ -72,6 +86,7 @@ export default {
                 },
                 {
                     id: 8,
+                    image: "8.webp",
                     rating: 7.3,
                     name: "Никто",
                     year: 2021,
@@ -79,6 +94,7 @@ export default {
                 },
                 {
                     id: 9,
+                    image: undefined,
                     rating: 7.9,
                     name: "Дюна",
                     year: 2021,
@@ -86,6 +102,7 @@ export default {
                 },
                 {
                     id: 10,
+                    image: "2.webp",
                     rating: 7.3,
                     name: "Не время умирать",
                     year: 2021,
@@ -93,6 +110,7 @@ export default {
                 },
                 {
                     id: 11,
+                    image: "3.webp",
                     rating: 7.7,
                     name: "Гнев человеческий",
                     year: 2021,
@@ -100,6 +118,7 @@ export default {
                 },
                 {
                     id: 12,
+                    image: "4.webp",
                     rating: 7.1,
                     name: "День курка",
                     year: 2020,
@@ -107,6 +126,7 @@ export default {
                 },
                 {
                     id: 13,
+                    image: "5.webp",
                     rating: 6.8,
                     name: "Охота на воров",
                     year: 2018,
@@ -114,6 +134,7 @@ export default {
                 },
                 {
                     id: 14,
+                    image: "6.webp",
                     rating: 5.5,
                     name: "Механик: Воскрешение",
                     year: 2016,
@@ -121,6 +142,7 @@ export default {
                 },
                 {
                     id: 15,
+                    image: "7.webp",
                     rating: 6.2,
                     name: "Веном 2",
                     year: 2021,
@@ -128,6 +150,7 @@ export default {
                 },
                 {
                     id: 16,
+                    image: null,
                     rating: 7.3,
                     name: "Никто",
                     year: 2021,
@@ -150,6 +173,7 @@ export default {
     },
     mounted() {
         this.resultListCards = this.listCards;
+        document.addEventListener('click', () => console.log('click'));
     },
 };
 </script>
@@ -174,12 +198,21 @@ html {
 
 .container {
     max-width: 1110px;
-    padding: 0 15px;
+    padding: 50px 15px;
     margin: 0 auto;
 }
 
 .glow-border {
     box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+}
+
+.block-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.block-sorting {
 }
 
 .list-cards {
